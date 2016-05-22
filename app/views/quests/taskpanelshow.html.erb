@@ -1,0 +1,33 @@
+<h1>Quests</h1><br>
+<% @quests.each do |quest| %>
+
+
+ <div class="info-box">
+                <span class="info-box-icon bg-primary" id=<%= quest.id %>><i class="fa fa-check-square-o"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-number"><%= quest.title %></span>
+				     <span class="info-box-text"><%= quest.content %></span>
+                  <span class="info-box-number"><%= quest.exp %> exp</span>
+				  <div class="text-right">
+				  <button class="btn btn-primary" onclick=(successtask(<%= quest.id %>,<%= quest.exp %>))>done</button>
+				  </div>
+                </div><!-- /.info-box-content -->
+				  
+              </div><!-- /.info-box -->
+<% end %>
+
+<script>
+function successtask(taskid,exp)
+{
+$('#'+taskid).removeClass('bg-primary');
+$('#'+taskid).addClass('bg-green');
+var experience = parseInt($('#currentexp').text()) + exp;
+var level = experience/1000;
+$('#currentexp').text(experience + " / " + (Math.floor(level) + 1) * 1000);
+$('#expbar').width(((experience % 1000) /4));
+$('#currentlevel').text(Math.floor(level) + 1); 
+
+ console.log(taskid,exp);
+  
+}
+</script>
